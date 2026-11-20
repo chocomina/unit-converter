@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>unit converter</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    <main class="card">
+        <header>
+            <h1>Unit Converter<span class="heart">❤</span></h1>
+<p class="subtitle"> lets convert something </p>
+        </header>
+
+        <label for="category">category</label>
+        <select id="category">
+            <option value="length">Length ・ mm cm m km</option>
+            <option value="weight">Weight ・ mg g kg t</option>
+            <option value="temperature">Temperature ・ °C °F K</option>
+        </select>
+
+        <label for="value">value</label>
+        <input id="value" type="number" value="1" step="any">
+
+        <div class="row">
+            <div class="field">
+                <label for="from">from</label>
+                <select id="from"></select>
+            </div>
+            <button id="swap" class="swap" type="button" title="swap">⇄</button>
+            <div class="field">
+                <label for="to">to</label>
+                <select id="to"></select>
+            </div>
+        </div>
+
+        <button id="convert">convert </button>
+
+        <p id="result" class="result"> ready when u are </p>
+    </main>
+
+    <script src="javascripkrt.js"></script>
+</body>
+</html>
