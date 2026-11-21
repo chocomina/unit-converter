@@ -1,12 +1,12 @@
 const categories = {
   length:      { units: ["mm", "cm", "m", "km"], factors: { mm: 0.001, cm: 0.01, m: 1, km: 1000 } },
-  weight:      { units: ["mg", "g", "kg", "t"],  factors: { mg: 0.001, g: 1, kg: 1000, t: 1000000 } },
+  weight:      { units: ["mg", "g", "kg"],       factors: { mg: 0.001, g: 1, kg: 1000 } },
   temperature: { units: ["c", "f", "k"],         factors: null },
 };
 
 const displayNames = {
   mm: "mm", cm: "cm", m: "m", km: "km",
-  mg: "mg", g: "g", kg: "kg", t: "t",
+  mg: "mg", g: "g", kg: "kg",
   c: "°C", f: "°F", k: "K",
 };
 
@@ -15,7 +15,6 @@ const valueInput     = document.getElementById("value");
 const fromSelect     = document.getElementById("from");
 const toSelect       = document.getElementById("to");
 const button         = document.getElementById("convert");
-const swapButton     = document.getElementById("swap");
 const resultEl       = document.getElementById("result");
 
 function fillUnits() {
@@ -46,35 +45,21 @@ function convert(value, from, to, category) {
   return value * factors[from] / factors[to];
 }
 
-function runConversion() {
-  const raw = valueInput.value.trim();
-  const value = Number(raw);
+button.addEventListener("click", () => {
+  const value = Number(valueInput.value);
 
-  if (raw === "" || Number.isNaN(value)) {
+  if (Number.isNaN(value)) {
     resultEl.textContent = "♡ please type a number ♡";
     return;
   }
 
   const result = convert(value, fromSelect.value, toSelect.value, categorySelect.value);
-  const pretty = Number(result.toFixed(6));
+  const pretty = Number(result.toFixed(6)); 
 
   resultEl.textContent =
     `${value} ${displayNames[fromSelect.value]} = ${pretty} ${displayNames[toSelect.value]} ✿`;
-}
-
-button.addEventListener("click", runConversion);
-
-valueInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") runConversion();
-});
-
-swapButton.addEventListener("click", () => {
-  const from = fromSelect.value;
-  fromSelect.value = toSelect.value;
-  toSelect.value = from;
-  runConversion();
 });
 
 categorySelect.addEventListener("change", fillUnits);
 
-fillUnits();
+fillUnits(); 
